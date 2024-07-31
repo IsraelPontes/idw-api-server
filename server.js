@@ -5,7 +5,13 @@ import { PrismaClient } from '@prisma/client'
 const app = express()
 const prisma = new PrismaClient()
 app.use(express.json())
-app.use(cors('https://idw-server-api.netlify.app/'))
+const corsOptions = {
+    origin: 'http://localhost:5173', // A origem do seu frontend
+    methods: ['GET', 'POST', 'PUT', 'DELETE'], // Métodos HTTP permitidos
+    allowedHeaders: ['Content-Type', 'Authorization'] // Cabeçalhos permitidos
+  };
+  
+  app.use(cors(corsOptions));
 
 const users = []
 
